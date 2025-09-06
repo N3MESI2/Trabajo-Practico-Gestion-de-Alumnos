@@ -1,0 +1,1 @@
+enum EstadoFinal { PENDIENTE, REGULAR, LIBRE, PROMOCIONADO }

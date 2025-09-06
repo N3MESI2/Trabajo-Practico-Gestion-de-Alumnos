@@ -1,0 +1,1 @@
+class Coordinador extends Persona { public Coordinador(String n,String a,String d){ super(n,a,d);} }

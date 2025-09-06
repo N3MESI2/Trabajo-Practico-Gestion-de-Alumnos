@@ -1,0 +1,1 @@
+class Profesor extends Persona { public Profesor(String n,String a,String d){ super(n,a,d);} }
