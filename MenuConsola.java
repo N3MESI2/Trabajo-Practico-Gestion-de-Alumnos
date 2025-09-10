@@ -22,6 +22,8 @@ class MenuConsola {
                     case "8": listarMateriasDeCarrera(); break;
                     case "9": mostrarTablaGeneralInscripciones(); break; // tabla global
                     case "10": uni.limpiarTodo(); System.out.println("Datos borrados."); break;
+                    case "11": altaCarrera(); break;
+                    case "12": agregarMateriaACarrera(); break;
                     case "0": System.out.println("Saliendo..."); return;
                     default: System.out.println("Opción inválida.");
                 }
@@ -31,6 +33,65 @@ class MenuConsola {
             System.out.println("\nPresione ENTER para continuar...");
             sc.nextLine();
         }
+    }
+    // 11) Crear una carrera completa
+private void altaCarrera() {
+    System.out.println("=== Alta de Carrera ===");
+    System.out.print("Nombre de la carrera: ");
+    String nombre = sc.nextLine().trim();
+
+    System.out.print("Duración (años): ");
+    int dur = Integer.parseInt(sc.nextLine().trim());
+
+    System.out.println("Datos del Coordinador:");
+    System.out.print("- Nombre: ");
+    String cn = sc.nextLine().trim();
+    System.out.print("- Apellido: ");
+    String ca = sc.nextLine().trim();
+    System.out.print("- DNI: ");
+    String cdni = sc.nextLine().trim();
+    Coordinador coord = new Coordinador(cn, ca, cdni);
+
+    System.out.print("Precio de inscripción: ");
+    double precioIns = Double.parseDouble(sc.nextLine().trim());
+    System.out.print("Precio de cuota: ");
+    double precioCuota = Double.parseDouble(sc.nextLine().trim());
+
+    Carrera c = new Carrera(nombre, dur, coord, precioIns, precioCuota);
+    uni.agregarCarrera(c);
+    System.out.println("✔ Carrera creada: " + c);
+}
+
+// 12) Agregar una materia a una carrera existente
+private void agregarMateriaACarrera() {
+    System.out.println("=== Alta de Materia ===");
+
+    // Reutilizo el selector que ya tenés
+    Carrera carrera = elegirCarrera();
+
+    System.out.print("Nombre de la materia: ");
+    String nombre = sc.nextLine().trim();
+
+    System.out.print("Curso (año, entero): ");
+    int curso = Integer.parseInt(sc.nextLine().trim());
+
+    System.out.print("Cuatrimestre (1 o 2): ");
+    int cuat = Integer.parseInt(sc.nextLine().trim());
+
+    System.out.println("Datos del Profesor:");
+    System.out.print("- Nombre: ");
+    String pn = sc.nextLine().trim();
+    System.out.print("- Apellido: ");
+    String pa = sc.nextLine().trim();
+    System.out.print("- DNI: ");
+    String pdni = sc.nextLine().trim();
+    Profesor prof = new Profesor(pn, pa, pdni);
+
+    Materia m = new Materia(nombre, curso, cuat, prof, carrera);
+    carrera.agregarMateria(m);
+    System.out.println("✔ Materia agregada a " + carrera.getNombre() + ": " + m);
+
+
     }
 
     private void mostrarMenu() {
@@ -47,6 +108,8 @@ class MenuConsola {
         System.out.println("8) Listar Materias de una Carrera (con cuatrimestre y profesor)");
         System.out.println("9) Tabla general: Carrera | Materia | Alumno | Estado | Inasistencias");
         System.out.println("10) Limpiar todos los datos");
+        System.out.println("11) Crear Carrera");
+        System.out.println("12) Agregar Materia a una Carrera");
         System.out.println("0) Salir");
         System.out.print("Opción: ");
     }
